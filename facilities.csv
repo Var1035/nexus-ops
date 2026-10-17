@@ -1,0 +1,21 @@
+facility_id,facility_name,city,country,facility_type
+F001,Austin Manufacturing Hub,Austin,United States,Factory
+F002,Hsinchu Industrial Hub,Hsinchu,Taiwan,Factory
+F003,Hwaseong Manufacturing Hub,Hwaseong,South Korea,Factory
+F004,Shenzhen Electronics Hub,Shenzhen,China,Factory
+F005,Chennai Manufacturing Hub,Chennai,India,Factory
+F006,Bengaluru Distribution Center,Bengaluru,India,Warehouse
+F007,Hyderabad Distribution Center,Hyderabad,India,Warehouse
+F008,Rotterdam Logistics Hub,Rotterdam,Netherlands,Warehouse
+F009,Hamburg Logistics Center,Hamburg,Germany,Port
+F010,Singapore Distribution Center,Singapore,Singapore,Warehouse
+F011,Nagoya Automotive Hub,Nagoya,Japan,Factory
+F012,Penang Electronics Hub,Penang,Malaysia,Factory
+F013,Phoenix Manufacturing Hub,Phoenix,United States,Factory
+F014,Dresden Industrial Hub,Dresden,Germany,Factory
+F015,Antwerp Materials Hub,Antwerp,Belgium,Warehouse
+F016,Kuala Lumpur Distribution Hub,Kuala Lumpur,Malaysia,Warehouse
+F017,Dallas Fulfillment Center,Dallas,United States,Warehouse
+F018,Warsaw Logistics Hub,Warsaw,Poland,Warehouse
+F019,Pune Components Hub,Pune,India,Factory
+F020,Osaka Electronics Hub,Osaka,Japan,Factory

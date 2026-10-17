@@ -1,0 +1,81 @@
+relationship_id,company_id,company_name,material_id,material_name,destination_facility_id,destination_facility_name,estimated_lead_time_days,simulated_capacity_units,data_status,data_note
+REL0001,C008,Lenovo,M001,Silicon wafers,F009,Hamburg Logistics Center,18,7814,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0002,C009,Intel,M024,Electric motors,F004,Shenzhen Electronics Hub,8,19849,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0003,C028,DHL Supply Chain,M002,Copper,F001,Austin Manufacturing Hub,8,7664,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0004,C015,STMicroelectronics,M017,Display panels,F020,Osaka Electronics Hub,4,18890,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0005,C013,Texas Instruments,M023,Connectors,F018,Warsaw Logistics Hub,29,7723,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0006,C029,Maersk,M019,Steel,F009,Hamburg Logistics Center,3,5731,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0007,C028,DHL Supply Chain,M011,NAND flash memory,F009,Hamburg Logistics Center,12,7555,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0008,C022,LG Energy Solution,M004,Cobalt,F003,Hwaseong Manufacturing Hub,27,3669,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0009,C023,CATL,M012,GPU modules,F020,Osaka Electronics Hub,19,1923,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0010,C030,FedEx,M018,Resins,F004,Shenzhen Electronics Hub,27,3082,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0011,C019,BASF,M021,Lithography equipment,F020,Osaka Electronics Hub,26,19418,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0012,C013,Texas Instruments,M023,Connectors,F003,Hwaseong Manufacturing Hub,5,7967,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0013,C019,BASF,M003,Lithium compounds,F008,Rotterdam Logistics Hub,9,12955,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0014,C018,Lam Research,M015,Battery cells,F012,Penang Electronics Hub,13,12630,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0015,C023,CATL,M007,Specialty chemicals,F009,Hamburg Logistics Center,7,6107,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0016,C035,Saint-Gobain,M024,Electric motors,F008,Rotterdam Logistics Hub,13,15647,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0017,C025,BYD,M009,Printed circuit boards,F018,Warsaw Logistics Hub,17,11126,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0018,C004,Foxconn,M008,Glass substrate,F002,Hsinchu Industrial Hub,23,13645,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0019,C018,Lam Research,M003,Lithium compounds,F007,Hyderabad Distribution Center,23,7467,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0020,C032,Flex,M013,Power management ICs,F015,Antwerp Materials Hub,12,9179,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0021,C009,Intel,M008,Glass substrate,F018,Warsaw Logistics Hub,19,19655,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0022,C028,DHL Supply Chain,M019,Steel,F013,Phoenix Manufacturing Hub,26,7686,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0023,C009,Intel,M017,Display panels,F016,Kuala Lumpur Distribution Hub,8,2043,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0024,C008,Lenovo,M005,Nickel,F006,Bengaluru Distribution Center,30,2581,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0025,C025,BYD,M013,Power management ICs,F020,Osaka Electronics Hub,32,17838,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0026,C017,Applied Materials,M018,Resins,F001,Austin Manufacturing Hub,10,18095,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0027,C018,Lam Research,M021,Lithography equipment,F011,Nagoya Automotive Hub,10,10117,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0028,C028,DHL Supply Chain,M006,Aluminum,F015,Antwerp Materials Hub,3,9130,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0029,C033,Jabil,M006,Aluminum,F017,Dallas Fulfillment Center,9,10279,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0030,C033,Jabil,M020,Packaging materials,F007,Hyderabad Distribution Center,12,12752,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0031,C011,Qualcomm,M018,Resins,F017,Dallas Fulfillment Center,3,11121,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0032,C032,Flex,M001,Silicon wafers,F004,Shenzhen Electronics Hub,26,10576,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0033,C016,ASML,M002,Copper,F008,Rotterdam Logistics Hub,8,3306,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0034,C032,Flex,M003,Lithium compounds,F018,Warsaw Logistics Hub,11,4707,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0035,C031,UPS,M018,Resins,F006,Bengaluru Distribution Center,19,17790,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0036,C028,DHL Supply Chain,M007,Specialty chemicals,F018,Warsaw Logistics Hub,15,10714,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0037,C026,Toyota,M022,Industrial gases,F012,Penang Electronics Hub,31,17459,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0038,C029,Maersk,M004,Cobalt,F008,Rotterdam Logistics Hub,17,2598,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0039,C022,LG Energy Solution,M001,Silicon wafers,F019,Pune Components Hub,17,19782,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0040,C015,STMicroelectronics,M001,Silicon wafers,F003,Hwaseong Manufacturing Hub,6,8001,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0041,C005,Sony,M002,Copper,F011,Nagoya Automotive Hub,7,17347,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0042,C016,ASML,M009,Printed circuit boards,F016,Kuala Lumpur Distribution Hub,16,18169,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0043,C009,Intel,M024,Electric motors,F019,Pune Components Hub,33,8462,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0044,C031,UPS,M014,Sensors,F007,Hyderabad Distribution Center,9,3676,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0045,C028,DHL Supply Chain,M012,GPU modules,F014,Dresden Industrial Hub,29,15803,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0046,C004,Foxconn,M022,Industrial gases,F004,Shenzhen Electronics Hub,6,13693,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0047,C022,LG Energy Solution,M004,Cobalt,F008,Rotterdam Logistics Hub,15,6732,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0048,C035,Saint-Gobain,M015,Battery cells,F005,Chennai Manufacturing Hub,30,6512,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0049,C018,Lam Research,M015,Battery cells,F008,Rotterdam Logistics Hub,7,15020,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0050,C007,HP Inc.,M002,Copper,F018,Warsaw Logistics Hub,3,3556,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0051,C016,ASML,M006,Aluminum,F014,Dresden Industrial Hub,34,16273,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0052,C014,Infineon Technologies,M013,Power management ICs,F002,Hsinchu Industrial Hub,13,12918,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0053,C001,Apple,M013,Power management ICs,F009,Hamburg Logistics Center,32,9847,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0054,C028,DHL Supply Chain,M023,Connectors,F018,Warsaw Logistics Hub,34,5572,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0055,C013,Texas Instruments,M010,DRAM memory,F007,Hyderabad Distribution Center,6,19478,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0056,C035,Saint-Gobain,M002,Copper,F011,Nagoya Automotive Hub,6,2143,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0057,C031,UPS,M017,Display panels,F017,Dallas Fulfillment Center,13,2363,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0058,C033,Jabil,M003,Lithium compounds,F006,Bengaluru Distribution Center,7,19998,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0059,C005,Sony,M022,Industrial gases,F008,Rotterdam Logistics Hub,28,4428,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0060,C016,ASML,M019,Steel,F020,Osaka Electronics Hub,5,3186,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0061,C027,Bosch,M022,Industrial gases,F019,Pune Components Hub,23,9044,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0062,C014,Infineon Technologies,M022,Industrial gases,F011,Nagoya Automotive Hub,18,9203,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0063,C026,Toyota,M005,Nickel,F010,Singapore Distribution Center,32,10860,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0064,C005,Sony,M001,Silicon wafers,F015,Antwerp Materials Hub,9,2900,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0065,C035,Saint-Gobain,M007,Specialty chemicals,F017,Dallas Fulfillment Center,19,4840,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0066,C023,CATL,M003,Lithium compounds,F008,Rotterdam Logistics Hub,26,9838,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0067,C011,Qualcomm,M015,Battery cells,F018,Warsaw Logistics Hub,22,17832,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0068,C001,Apple,M022,Industrial gases,F018,Warsaw Logistics Hub,22,3894,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0069,C009,Intel,M009,Printed circuit boards,F004,Shenzhen Electronics Hub,9,18628,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0070,C010,NVIDIA,M009,Printed circuit boards,F010,Singapore Distribution Center,16,11735,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0071,C014,Infineon Technologies,M022,Industrial gases,F009,Hamburg Logistics Center,35,16508,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0072,C017,Applied Materials,M002,Copper,F003,Hwaseong Manufacturing Hub,30,9566,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0073,C003,TSMC,M001,Silicon wafers,F011,Nagoya Automotive Hub,11,9083,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0074,C011,Qualcomm,M024,Electric motors,F015,Antwerp Materials Hub,30,18879,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0075,C001,Apple,M004,Cobalt,F003,Hwaseong Manufacturing Hub,12,18377,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0076,C003,TSMC,M012,GPU modules,F019,Pune Components Hub,12,14583,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0077,C009,Intel,M002,Copper,F010,Singapore Distribution Center,26,1807,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0078,C023,CATL,M007,Specialty chemicals,F008,Rotterdam Logistics Hub,9,12089,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0079,C027,Bosch,M020,Packaging materials,F005,Chennai Manufacturing Hub,18,5824,SIMULATED,Synthetic relationship; not a verified real-world supplier link
+REL0080,C012,Micron Technology,M014,Sensors,F001,Austin Manufacturing Hub,14,11385,SIMULATED,Synthetic relationship; not a verified real-world supplier link
