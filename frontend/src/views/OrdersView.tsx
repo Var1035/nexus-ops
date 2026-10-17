@@ -66,7 +66,7 @@ export const OrdersView: React.FC = () => {
           >
             <div style={{ fontSize: '10.5px', color: 'var(--text-muted)' }}>AT-RISK ORDER REVENUE</div>
             <div style={{ fontSize: '16px', fontWeight: 800, color: 'var(--accent-rose)', fontFamily: 'var(--font-mono)' }}>
-              ${atRiskVal.toLocaleString()}
+              ₹{atRiskVal.toLocaleString()}
             </div>
           </div>
 
@@ -80,7 +80,7 @@ export const OrdersView: React.FC = () => {
           >
             <div style={{ fontSize: '10.5px', color: 'var(--text-muted)' }}>TOTAL PIPELINE VALUE</div>
             <div style={{ fontSize: '16px', fontWeight: 800, color: 'var(--accent-cyan)', fontFamily: 'var(--font-mono)' }}>
-              ${orders.reduce((sum, o) => sum + o.value, 0).toLocaleString()}
+              ₹{orders.reduce((sum, o) => sum + o.value, 0).toLocaleString()}
             </div>
           </div>
         </div>
@@ -144,11 +144,11 @@ export const OrdersView: React.FC = () => {
                     <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>{ord.quantity} Units</div>
                   </td>
                   <td style={{ padding: '14px 18px', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>
-                    ${ord.value.toLocaleString()}
+                    ₹{ord.value.toLocaleString()}
                   </td>
                   <td style={{ padding: '14px 18px', fontFamily: 'var(--font-mono)' }}>{ord.deadline}</td>
                   <td style={{ padding: '14px 18px', fontFamily: 'var(--font-mono)', color: 'var(--accent-rose)', fontWeight: 600 }}>
-                    ${ord.slaPenaltyPerDay.toLocaleString()} / day
+                    ₹{ord.slaPenaltyPerDay.toLocaleString()} / day
                   </td>
                   <td style={{ padding: '14px 18px' }}>
                     <span

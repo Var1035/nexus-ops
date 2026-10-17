@@ -34,7 +34,7 @@ export const AgentActivityView: React.FC = () => {
     },
     Logistics: {
       role: 'Logistics Optimization Agent',
-      instructions: 'Evaluate expedited freight modes (commercial cargo charter vs ocean vs ground). Balance freight surcharge against assembly line downtime cost ($95,000/day).',
+      instructions: 'Evaluate expedited freight modes (commercial cargo charter vs ocean vs ground). Balance freight surcharge against assembly line downtime cost (₹95,000/day).',
       guardrails: 'Transit schedules must reflect active carrier timetables and published airport handling limits.',
     },
     Decision: {

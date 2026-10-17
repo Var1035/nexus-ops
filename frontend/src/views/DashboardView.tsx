@@ -82,7 +82,7 @@ export const DashboardView: React.FC = () => {
             <div style={{ textAlign: 'right' }}>
               <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>FINANCIAL EXPOSURE</div>
               <div style={{ fontSize: '20px', fontWeight: 800, color: 'var(--accent-rose)', fontFamily: 'var(--font-mono)' }}>
-                ${criticalIncident.financialExposure.toLocaleString()}
+                ₹{criticalIncident.financialExposure.toLocaleString()}
               </div>
             </div>
             <button
@@ -129,7 +129,7 @@ export const DashboardView: React.FC = () => {
             <ShieldAlert size={18} color="var(--accent-amber)" />
           </div>
           <div style={{ fontSize: '26px', fontWeight: 800, color: 'var(--accent-amber)', fontFamily: 'var(--font-mono)' }}>
-            ${systemStats.atRiskRevenue.toLocaleString()}
+            ₹{systemStats.atRiskRevenue.toLocaleString()}
           </div>
           <div style={{ fontSize: '11px', color: 'var(--text-secondary)', marginTop: '4px' }}>
             {atRiskOrdersCount > 0 ? `Across ${atRiskOrdersCount} downstream purchase orders` : 'No revenue exposure'}
@@ -282,7 +282,7 @@ export const DashboardView: React.FC = () => {
                     <div style={{ textAlign: 'right' }}>
                       <div style={{ fontSize: '10.5px', color: 'var(--text-muted)' }}>EXPOSURE</div>
                       <div style={{ fontSize: '13px', fontWeight: 700, color: 'var(--text-primary)', fontFamily: 'var(--font-mono)' }}>
-                        ${inc.financialExposure.toLocaleString()}
+                        ₹{inc.financialExposure.toLocaleString()}
                       </div>
                     </div>
                     <button

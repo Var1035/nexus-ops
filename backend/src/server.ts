@@ -661,7 +661,7 @@ app.get('/api/graph/impact/:id', async (req, res) => {
         id: oProps.id,
         label: `${oProps.id} (${oProps.quantity} units)`,
         type: 'Order',
-        subType: `$${Number(oProps.value || 100000).toLocaleString()}`,
+        subType: `₹${Number(oProps.value || 100000).toLocaleString()}`,
         x: 1640,
         y: 160 + idx * 140,
         isImpacted: true,
@@ -751,19 +751,19 @@ app.post('/api/incidents/:id/investigate', async (req, res) => {
         evidence: [
           `MATCH (i:Incident {id: '${id}'})-[:AFFECTS_SHIPMENT]->(shp:Shipment)-[:DESTINED_FOR]->(f:Facility)`,
           `Buffer capacity at ${facName} exhausts within 48h based on current assembly burn rate`,
-          `Assembly downtime cost penalty: $3,500/hr`,
+          `Assembly downtime cost penalty: ₹3,500/hr`,
         ],
       },
       {
         id: 'find-2',
         agentRole: 'Risk',
-        title: `Contractual Exposure: $${totalOrderExposure.toLocaleString()} Across Customer Orders`,
-        summary: `SLA liquidated damages exposure: ${affectedOrdersText}. Default penalty of $${dailyDamages.toLocaleString()}/day activates immediately upon promised deadline breach.`,
+        title: `Contractual Exposure: ₹${totalOrderExposure.toLocaleString()} Across Customer Orders`,
+        summary: `SLA liquidated damages exposure: ${affectedOrdersText}. Default penalty of ₹${dailyDamages.toLocaleString()}/day activates immediately upon promised deadline breach.`,
         confidence: 98,
         executionTimeMs: 14,
         metrics: {
-          'Revenue at Risk': `$${totalOrderExposure.toLocaleString()}`,
-          'Daily Liquidated Damages': `$${dailyDamages.toLocaleString()} / day`,
+          'Revenue at Risk': `₹${totalOrderExposure.toLocaleString()}`,
+          'Daily Liquidated Damages': `₹${dailyDamages.toLocaleString()} / day`,
           'SLA Risk Severity': isI1 ? 'Critical Breach' : 'High Priority',
         },
         evidence: [
@@ -797,7 +797,7 @@ app.post('/api/incidents/:id/investigate', async (req, res) => {
         executionTimeMs: 11,
         metrics: {
           'Transit Time Saved': `${Math.min(delayDays, 5)} Days`,
-          'Expediting Surcharge': `$${actionCost.toLocaleString()}`,
+          'Expediting Surcharge': `₹${actionCost.toLocaleString()}`,
           'Route Status': 'Priority Highway Transit Corridor',
         },
         evidence: [
@@ -809,17 +809,17 @@ app.post('/api/incidents/:id/investigate', async (req, res) => {
         id: 'find-5',
         agentRole: 'Decision',
         title: `Executive Recommendation: Option 1 Dual-Sourcing Protocol`,
-        summary: `Synthesized findings from all 4 upstream agents. Recommends Option 1 (Dual-Sourcing via ${altName}) with 97.2% utility score, protecting $${totalOrderExposure.toLocaleString()} revenue for $${actionCost.toLocaleString()} total mitigation cost.`,
+        summary: `Synthesized findings from all 4 upstream agents. Recommends Option 1 (Dual-Sourcing via ${altName}) with 97.2% utility score, protecting ₹${totalOrderExposure.toLocaleString()} revenue for ₹${actionCost.toLocaleString()} total mitigation cost.`,
         confidence: 97,
         executionTimeMs: 10,
         metrics: {
           'Utility Score': '97.2 / 100',
-          'Net Saved Loss': `$${(totalOrderExposure - actionCost).toLocaleString()}`,
+          'Net Saved Loss': `₹${(totalOrderExposure - actionCost).toLocaleString()}`,
           'Assembly Line Stoppage': '0 Hours',
         },
         evidence: [
           `Averts factory line stoppage and customer contract breach`,
-          `Saves $${(totalOrderExposure - actionCost).toLocaleString()} in net financial damage`,
+          `Saves ₹${(totalOrderExposure - actionCost).toLocaleString()} in net financial damage`,
         ],
       },
     ];
@@ -839,7 +839,7 @@ app.post('/api/incidents/:id/investigate', async (req, res) => {
         tradeOffs: [
           `100% protection of customer delivery commitments`,
           `Prevents factory line stoppage at ${facName}`,
-          `Requires $${actionCost.toLocaleString()} expedited procurement & transit surcharge`,
+          `Requires ₹${actionCost.toLocaleString()} expedited procurement & transit surcharge`,
         ],
       },
       {
@@ -855,7 +855,7 @@ app.post('/api/incidents/:id/investigate', async (req, res) => {
         utilityScore: 74.0,
         tradeOffs: [
           `Reduces delay from ${delayDays} days to 2 days, but still leaves factory buffer vulnerable`,
-          `High expediting surcharge ($${(actionCost * 1.8).toLocaleString()})`,
+          `High expediting surcharge (₹${(actionCost * 1.8).toLocaleString()})`,
         ],
       },
       {
@@ -871,7 +871,7 @@ app.post('/api/incidents/:id/investigate', async (req, res) => {
         utilityScore: 25.0,
         tradeOffs: [
           'Zero upfront logistics surcharge',
-          `Incurs $${dailyDamages.toLocaleString()}/day liquidated damages penalty across customer contracts`,
+          `Incurs ₹${dailyDamages.toLocaleString()}/day liquidated damages penalty across customer contracts`,
           'Assembly line halted with severe customer relationship fallout',
         ],
       },
@@ -905,7 +905,7 @@ app.post('/api/decisions/:id/approve', async (req, res) => {
         decisionChosen: 'Option 1: Autonomous Dual-Sourcing & Logistics Expediting',
         actionExecuted: 'Emergency purchase order authorized; buffer stock transferred to assembly factory',
         outcomeMetric: 'Disruption completely absorbed; zero customer SLA default penalties',
-        financialDelta: '+$${Number(costDelta || 8500).toLocaleString()} mitigation cost vs $144,000 loss prevented',
+        financialDelta: '+₹${Number(costDelta || 8500).toLocaleString()} mitigation cost vs ₹144,000 loss prevented',
         falkorDbKey: 'EPISODIC_MEM_' + toString(timestamp())
       })
     `);
@@ -973,7 +973,7 @@ app.post('/api/chat', async (req, res) => {
     if (query.includes('risk') || query.includes('customer') || query.includes('order')) {
       const cypher = 'MATCH (o:Order {status: "AT_RISK"})<-[:PLACED]-(c:Customer) RETURN o, c';
       res.json({
-        reply: `FalkorDB graph query shows **3 customer orders currently AT RISK**: **O1** (Electric Vehicle, Customer One, Qty 120), **O3** (Commercial Vehicle, Customer One, Qty 45), and **O4** (Vehicle Control Unit, Customer Two, Qty 60). Total revenue exposure is **$195,000**.`,
+        reply: `FalkorDB graph query shows **3 customer orders currently AT RISK**: **O1** (Electric Vehicle, Customer One, Qty 120), **O3** (Commercial Vehicle, Customer One, Qty 45), and **O4** (Vehicle Control Unit, Customer Two, Qty 60). Total revenue exposure is **₹195,000**.`,
         citations: [
           {
             entity: 'Orders at Risk',

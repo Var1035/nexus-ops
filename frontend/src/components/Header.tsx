@@ -141,7 +141,7 @@ export const Header: React.FC = () => {
             title="Total financial exposure across active disruptions"
           >
             <ShieldAlert size={14} />
-            <span>${totalExposure.toLocaleString()} at Risk</span>
+            <span>₹{totalExposure.toLocaleString()} at Risk</span>
           </div>
         )}
 

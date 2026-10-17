@@ -134,7 +134,7 @@ export const DecisionSimView: React.FC = () => {
             <label style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer', fontSize: '13px' }}>
               <div>
                 <div style={{ fontWeight: 600, color: 'var(--text-primary)' }}>Switch to Qualified Backup Supplier</div>
-                <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Lead time: 3 days, Cost: +$7,200</div>
+                <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Lead time: 3 days, Cost: +₹7,200</div>
               </div>
               <input
                 type="checkbox"
@@ -147,7 +147,7 @@ export const DecisionSimView: React.FC = () => {
             <label style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer', fontSize: '13px' }}>
               <div>
                 <div style={{ fontWeight: 600, color: 'var(--text-primary)' }}>Charter Priority Air Cargo</div>
-                <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Reduces transit by 6 days, Cost: +$6,500</div>
+                <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Reduces transit by 6 days, Cost: +₹6,500</div>
               </div>
               <input
                 type="checkbox"
@@ -190,7 +190,7 @@ export const DecisionSimView: React.FC = () => {
             <div style={{ padding: '14px', backgroundColor: 'var(--bg-app)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
               <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>SLA LIQUIDATED DAMAGES</div>
               <div style={{ fontSize: '22px', fontWeight: 800, color: slaPenalties === 0 ? 'var(--accent-emerald)' : 'var(--accent-rose)', fontFamily: 'var(--font-mono)' }}>
-                ${slaPenalties.toLocaleString()}
+                ₹{slaPenalties.toLocaleString()}
               </div>
               <div style={{ fontSize: '11px', color: 'var(--text-secondary)', marginTop: '4px' }}>
                 {slaPenalties === 0 ? 'Zero customer SLA breach' : 'Penalties incurred from delay'}
@@ -200,7 +200,7 @@ export const DecisionSimView: React.FC = () => {
             <div style={{ padding: '14px', backgroundColor: 'var(--bg-app)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
               <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>ACTION SURCHARGE</div>
               <div style={{ fontSize: '22px', fontWeight: 800, color: 'var(--text-primary)', fontFamily: 'var(--font-mono)' }}>
-                ${totalMitigationCost.toLocaleString()}
+                ₹{totalMitigationCost.toLocaleString()}
               </div>
               <div style={{ fontSize: '11px', color: 'var(--text-secondary)', marginTop: '4px' }}>
                 Air freight + procurement delta
@@ -210,7 +210,7 @@ export const DecisionSimView: React.FC = () => {
             <div style={{ padding: '14px', backgroundColor: 'var(--bg-app)', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-color)' }}>
               <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>NET SAVINGS AVOIDED</div>
               <div style={{ fontSize: '22px', fontWeight: 800, color: 'var(--accent-cyan)', fontFamily: 'var(--font-mono)' }}>
-                ${netSavingsVsUnmitigated.toLocaleString()}
+                ₹{netSavingsVsUnmitigated.toLocaleString()}
               </div>
               <div style={{ fontSize: '11px', color: 'var(--text-secondary)', marginTop: '4px' }}>
                 Compared to unmitigated fallout
@@ -229,7 +229,7 @@ export const DecisionSimView: React.FC = () => {
               lineHeight: 1.45,
             }}
           >
-            <strong>Decision Agent Assessment:</strong> Combining dual-sourcing with expedited logistics minimizes line stoppage risk, saving an estimated net <strong>${netSavingsVsUnmitigated.toLocaleString()}</strong> in downtime and contractual SLA penalties.
+            <strong>Decision Agent Assessment:</strong> Combining dual-sourcing with expedited logistics minimizes line stoppage risk, saving an estimated net <strong>₹{netSavingsVsUnmitigated.toLocaleString()}</strong> in downtime and contractual SLA penalties.
           </div>
         </div>
       </div>

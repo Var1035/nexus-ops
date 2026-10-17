@@ -200,7 +200,7 @@ export const IncidentWarRoomView: React.FC = () => {
             <div>
               <div style={{ fontSize: '10px', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Revenue at Risk</div>
               <div style={{ fontSize: '16px', fontWeight: 800, color: 'var(--accent-amber)', fontFamily: 'var(--font-mono)' }}>
-                ${activeIncident.financialExposure.toLocaleString()}
+                ₹{activeIncident.financialExposure.toLocaleString()}
               </div>
             </div>
           </div>
@@ -457,7 +457,7 @@ RETURN m.name, p.name, o.id, c.name, collect(alt.name) AS backupSuppliers;`}
                       <div>
                         <div style={{ fontSize: '9px', color: 'var(--text-muted)' }}>COST DELTA</div>
                         <div style={{ fontSize: '12px', fontWeight: 700, color: 'var(--text-primary)', fontFamily: 'var(--font-mono)' }}>
-                          +${opt.costDelta.toLocaleString()}
+                          +₹{opt.costDelta.toLocaleString()}
                         </div>
                       </div>
                       <div>
@@ -675,7 +675,7 @@ RETURN m.name, p.name, o.id, c.name, collect(alt.name) AS backupSuppliers;`}
             >
               <strong>Authorizing:</strong> {selectedOption.title}
               <div style={{ marginTop: '8px', color: 'var(--text-secondary)' }}>
-                {selectedOption.description} Total financial authorization: <strong>${selectedOption.costDelta.toLocaleString()}</strong>.
+                {selectedOption.description} Total financial authorization: <strong>₹{selectedOption.costDelta.toLocaleString()}</strong>.
               </div>
             </div>
 

@@ -910,23 +910,32 @@ export const InteractiveGraph: React.FC<InteractiveGraphProps> = ({
                 overflowY: 'auto',
               }}
             >
-              {Object.entries(selectedNode.properties || selectedNode.details || {}).map(([key, val]) => (
-                <div
-                  key={key}
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    fontSize: '11px',
-                  }}
-                >
-                  <span style={{ color: 'var(--text-muted)', textTransform: 'capitalize' }}>
-                    {key.replace(/([A-Z])/g, ' $1')}:
-                  </span>
-                  <span style={{ fontWeight: 600, color: 'var(--text-primary)', fontFamily: 'var(--font-mono)' }}>
-                    {String(val)}
-                  </span>
-                </div>
-              ))}
+              {Object.entries(selectedNode.properties || selectedNode.details || {}).map(([key, val]) => {
+                let displayVal = String(val);
+                if (
+                  ['value', 'slaPenaltyPerDay', 'financialExposure'].includes(key) &&
+                  typeof val === 'number'
+                ) {
+                  displayVal = `₹${val.toLocaleString()}`;
+                }
+                return (
+                  <div
+                    key={key}
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      fontSize: '11px',
+                    }}
+                  >
+                    <span style={{ color: 'var(--text-muted)', textTransform: 'capitalize' }}>
+                      {key.replace(/([A-Z])/g, ' $1')}:
+                    </span>
+                    <span style={{ fontWeight: 600, color: 'var(--text-primary)', fontFamily: 'var(--font-mono)' }}>
+                      {displayVal}
+                    </span>
+                  </div>
+                );
+              })}
             </div>
           </div>
         )}

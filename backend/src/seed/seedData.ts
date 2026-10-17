@@ -362,7 +362,7 @@ export async function seedFalkorDatabase() {
       decisionChosen: 'Autonomous Dual-Sourcing via Mahindra & Mahindra Priority Route',
       actionExecuted: 'Authorized emergency PO for 150 battery units with expedited freight transit',
       outcomeMetric: '6-day disruption absorbed; 100% of EV customer orders fulfilled on time',
-      financialDelta: '+$8,500 logistics surcharge (saved $144,000 liquidated damages)',
+      financialDelta: '+₹8,500 logistics surcharge (saved ₹144,000 liquidated damages)',
       falkorDbKey: 'EPISODIC_HIST_01'
     })
   `);
