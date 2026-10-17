@@ -6,7 +6,7 @@ When supply chain disruptions strike (e.g. supplier delays, port congestion, fac
 
 ---
 
-## 🌟 Key Features
+##  Key Features
 
 - **Real-Time Operations Dashboard**: Network health, active supply disruptions, revenue at risk, and interactive subgraph canvas.
 - **Incident War Room**: 100% full-width FalkorDB Subgraph Traversal canvas paired with grounded multi-agent findings and decision trade-offs.
@@ -23,7 +23,7 @@ When supply chain disruptions strike (e.g. supplier delays, port congestion, fac
 
 ---
 
-## 🏗️ Architecture & Technology Stack
+## Architecture & Technology Stack
 
 - **Frontend**: React 19, TypeScript, Vite, Vanilla CSS Design System, Lucide Icons.
 - **Backend API**: Node.js, Express, TypeScript, Official `falkordb` SDK.
@@ -31,7 +31,7 @@ When supply chain disruptions strike (e.g. supplier delays, port congestion, fac
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### 1. Prerequisites
 - Node.js (v18+)
