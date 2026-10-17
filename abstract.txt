@@ -1,0 +1,154 @@
+NEXUS OPS — PROJECT ABSTRACT AND TECHNICAL PLAN
+Graph-Powered Autonomous Supply Chain Response
+
+1. PROJECT OVERVIEW
+Nexus Ops is an AI-powered supply-chain operations platform that helps teams investigate disruptions, understand downstream impact, compare response options, and record outcomes. It uses FalkorDB as the central connected knowledge graph linking suppliers, materials, products, factories, warehouses, shipments, orders, customers, incidents, decisions, and actions.
+
+2. PROBLEM STATEMENT
+Supply-chain disruptions are difficult to assess because operational information is spread across separate systems and records. A delayed supplier shipment can affect production, inventory, delivery commitments, and customers several steps downstream. Teams may need to manually connect spreadsheets and systems before deciding what to do. Nexus Ops aims to shorten this investigation by traversing connected graph data and coordinating AI-assisted analysis.
+
+3. PROPOSED SOLUTION AND CORE WORKFLOW
+1. An operator creates a disruption incident, such as a supplier reporting a 10-day material delay.
+2. The backend validates the incident and queries FalkorDB.
+3. Graph traversal identifies connected materials, products, facilities, shipments, and potentially affected orders.
+4. Specialized agent roles analyze impact, operational risk, procurement alternatives, and logistics options.
+5. A Decision Agent combines the findings into a recommendation with supporting evidence, assumptions, and risks.
+6. The operator reviews and approves the proposed response. For the hackathon, consequential operations can be simulated.
+7. The system records the incident, evidence, decision, action, and outcome in FalkorDB so future investigations can retrieve relevant history.
+
+4. PLANNED TECH STACK
+Frontend:
+- React with Next.js
+- TypeScript
+- Tailwind CSS
+- Reusable SaaS dashboard components and charting/graph-visualization libraries, selected during implementation
+
+Backend:
+- Node.js
+- Express.js REST API
+- TypeScript or JavaScript, finalized during setup
+- Server-side services for incidents, graph queries, agent orchestration, and actions
+
+Graph database:
+- FalkorDB Cloud
+- Cypher-compatible graph queries
+- Graph model for suppliers, materials, products, factories, warehouses, shipments, orders, customers, incidents, decisions, agent findings, actions, and outcomes
+
+AI:
+- An LLM API for analysis and structured recommendations; provider to be selected based on access, cost, latency, and hackathon constraints
+- Specialized agent roles: Impact, Risk, Procurement, Logistics, and Decision
+- Initially, these roles may use one LLM with separate prompts and structured outputs rather than requiring five separate models
+- LLM responses will be checked against retrieved data and business rules; the model must not invent supplier capacity, inventory, prices, or delivery estimates
+
+API and data exchange:
+- HTTP REST endpoints between frontend and backend
+- JSON request/response schemas
+- Optional polling or streaming for agent progress if time permits
+
+Development and delivery tools:
+- Google Antigravity as the AI-assisted development environment
+- Git and GitHub for version control and collaboration
+- Postman or equivalent for API testing
+- Browser developer tools for frontend debugging
+- Environment variables for credentials and configuration
+- Deployment provider to be chosen based on compatibility and time available
+
+5. PROPOSED APPLICATION MODULES
+- Operations Dashboard: incident overview, risk indicators, and affected-order summaries
+- Incident Center: create and investigate supply-chain incidents
+- Supply Chain Graph Explorer: visualize actual nodes, relationships, and paths returned from FalkorDB
+- Suppliers: supplier details and alternative-supplier information
+- Shipments and Orders: relevant shipment, inventory, deadline, and order status
+- Agent Activity: show agent tasks, evidence, findings, and progress
+- Decision Center: display recommended options, rationale, confidence/limitations, and approval controls
+- Action Center: create or simulate procurement requests, inventory reservations, and notifications
+- Incident History: retrieve previous incidents, decisions, actions, and outcomes
+
+6. PROPOSED GRAPH MODEL
+Node labels:
+- Supplier
+- Material
+- Product
+- Factory
+- Warehouse
+- Shipment
+- Order
+- Customer
+- Incident
+- AgentFinding
+- Decision
+- Action
+- Outcome
+
+Example relationships:
+- (Supplier)-[:SUPPLIES]->(Material)
+- (Product)-[:USES]->(Material)
+- (Product)-[:PRODUCED_AT]->(Factory)
+- (Shipment)-[:CARRIES]->(Material)
+- (Shipment)-[:DELIVERED_TO]->(Factory)
+- (Warehouse)-[:STORES]->(Product)
+- (Order)-[:ORDERS]->(Product)
+- (Order)-[:PLACED_BY]->(Customer)
+- (Incident)-[:AFFECTS]->(Shipment)
+- (Incident)-[:INVESTIGATED_BY]->(AgentFinding)
+- (Decision)-[:BASED_ON]->(AgentFinding)
+- (Decision)-[:LEADS_TO]->(Action)
+- (Action)-[:HAS_OUTCOME]->(Outcome)
+
+The final labels, properties, and relationship directions will be validated and made consistent before implementation.
+
+7. AI AGENT RESPONSIBILITIES
+- Impact Agent: uses graph evidence to identify downstream dependencies and potentially affected orders.
+- Risk Agent: evaluates urgency using available inventory, order deadlines, customer priority, and defined business rules.
+- Procurement Agent: compares alternative suppliers using verified availability, capacity, cost, and lead-time data.
+- Logistics Agent: evaluates available transport and delivery options using provided data.
+- Decision Agent: compares options, explains trade-offs, and returns a structured recommendation with evidence and unresolved assumptions.
+
+Agents will communicate through the backend using structured data. The first implementation will prioritize a reliable, demonstrable workflow over unnecessary multi-model complexity.
+
+8. PLANNED API ENDPOINTS
+- POST /api/incidents — create an incident
+- POST /api/incidents/:id/investigate — run graph-based impact analysis and agent workflow
+- GET /api/incidents — list incidents
+- GET /api/incidents/:id — retrieve incident details and findings
+- GET /api/graph/impact/:incidentId — retrieve connected impact data for visualization
+- GET /api/suppliers — list suppliers
+- GET /api/orders/affected/:incidentId — retrieve affected orders
+- POST /api/decisions/:id/approve — approve a proposed action
+- POST /api/actions/:id/execute — execute or simulate an approved action
+- GET /api/incidents/:id/history — retrieve stored investigation history
+
+These are planned endpoints and may be adjusted to fit the final implementation.
+
+9. DATA AND DEMONSTRATION PLAN
+The hackathon demo will use synthetic supply-chain data, including suppliers, materials, products, facilities, shipments, inventory, orders, customers, lead times, and deadlines. A reproducible scenario will introduce a supplier delay, query the graph, identify affected entities, generate agent findings, present a recommended response, simulate an approved action, and store the outcome. Any displayed counts or savings will be calculated from the demo data rather than invented by the LLM.
+
+10. SECURITY AND RELIABILITY
+- FalkorDB credentials and LLM API keys remain on the server in environment variables and are never exposed to the browser.
+- Validate API inputs and use parameterized graph queries.
+- Treat LLM output as untrusted; validate structured results and enforce business rules in backend code.
+- Require approval or simulation for consequential actions.
+- Include loading, error, and retry states where feasible.
+- Keep a repeatable fallback demo path if an external API is unavailable.
+
+11. HACKATHON TRACK ALIGNMENT
+- Agents That Act on Connected Data: agents query graph relationships and use the findings to recommend and perform approved or simulated actions.
+- Agent Memory & Coordination: agent findings are coordinated by the backend and incidents, decisions, actions, and outcomes are stored for future retrieval.
+- Company Brain: the graph connects operational entities and incident history into a connected supply-chain knowledge layer.
+Final eligibility for multiple tracks depends on the event rules and judging criteria.
+
+12. SCOPE AND DELIVERY PLAN
+The priority is one complete end-to-end workflow rather than a full enterprise resource planning system:
+Supplier disruption -> FalkorDB traversal -> impact and risk analysis -> alternative evaluation -> decision -> approved/simulated action -> persistent outcome memory.
+
+Planned schedule:
+- October 15: set up frontend and backend, connect FalkorDB, create synthetic graph data, and implement the first graph traversal.
+- October 16: implement agent roles, evidence-based recommendations, and incident/decision storage.
+- October 17: finish essential screens, integrate the workflow, test the complete demo, and freeze features.
+- October 18: regression testing, bug fixes, recording/editing the demo video, documentation, and submission.
+
+13. EXPECTED OUTCOME
+Nexus Ops will demonstrate how a graph database and coordinated AI agent roles can help an operations team trace supply-chain dependencies, investigate disruption impact, recommend a response, record actions, and reuse incident history. The key technical demonstration is that FalkorDB actively powers the investigation and memory rather than serving only as a visualization layer.
+
+KEYWORDS
+Supply Chain Operations, FalkorDB, Knowledge Graph, Cypher, React, Next.js, Node.js, Express, LLM, AI Agents, Graph Traversal, Incident Response, Persistent Memory, Decision Support

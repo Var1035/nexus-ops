@@ -1,0 +1,13 @@
+{
+  "name": "nexus-ops",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Nexus Ops - Graph-Powered Autonomous Supply Chain Response",
+  "scripts": {
+    "dev": "npm --prefix frontend run dev",
+    "backend": "npm --prefix backend run dev",
+    "seed": "npm --prefix backend run seed",
+    "build": "npm --prefix frontend run build",
+    "preview": "npm --prefix frontend run preview"
+  }
+}
