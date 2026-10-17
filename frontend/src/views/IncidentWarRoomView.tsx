@@ -21,7 +21,9 @@ import { InteractiveGraph } from '../components/InteractiveGraph';
 
 export const IncidentWarRoomView: React.FC = () => {
   const {
+    incidents,
     activeIncident,
+    setActiveIncident,
     agentFindings,
     decisionOptions,
     selectedOption,
@@ -119,6 +121,35 @@ export const IncidentWarRoomView: React.FC = () => {
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            {incidents.length > 1 && (
+              <select
+                value={activeIncident.id}
+                onChange={(e) => {
+                  const inc = incidents.find((i) => i.id === e.target.value);
+                  if (inc) {
+                    setActiveIncident(inc);
+                    runInvestigation(inc.id);
+                  }
+                }}
+                className="input-control"
+                style={{
+                  fontSize: '11.5px',
+                  padding: '5px 8px',
+                  backgroundColor: 'var(--bg-app)',
+                  color: 'var(--text-primary)',
+                  fontWeight: 600,
+                  cursor: 'pointer',
+                  maxWidth: '240px',
+                }}
+              >
+                {incidents.map((inc) => (
+                  <option key={inc.id} value={inc.id}>
+                    {inc.code}: {inc.title.length > 28 ? inc.title.substring(0, 26) + '…' : inc.title}
+                  </option>
+                ))}
+              </select>
+            )}
+
             <button
               onClick={() => runInvestigation(activeIncident.id)}
               disabled={isInvestigating}

@@ -127,10 +127,19 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     setActiveSection('incidents');
 
     try {
-      const result = await api.investigateIncident(incidentId);
+      const [result, impactGraph] = await Promise.all([
+        api.investigateIncident(incidentId),
+        api.getGraph(incidentId),
+      ]);
       setInvestigationProgress(80);
       setAgentFindings(result.findings || []);
       setDecisionOptions(result.options || []);
+
+      if (impactGraph && impactGraph.nodes && impactGraph.nodes.length > 0) {
+        setGraphNodes(impactGraph.nodes);
+        setGraphEdges(impactGraph.edges);
+      }
+
       if (result.options && result.options.length > 0) {
         setSelectedOption(result.options[0]);
       }
@@ -138,7 +147,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     } catch {
       setInvestigationProgress(100);
     } finally {
-      setIsInvestigating(false);
+      setTimeout(() => {
+        setIsInvestigating(false);
+      }, 300);
     }
   }, []);
 

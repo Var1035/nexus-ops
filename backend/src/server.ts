@@ -220,62 +220,137 @@ app.get('/api/history', async (req, res) => {
   }
 });
 
-// 7. Graph Topology Traversal
+// 7. Graph Topology Traversal (Spacious non-overlapping layout for dynamic pan/zoom canvas)
 app.get('/api/graph', async (req, res) => {
   try {
     const graph = await getGraph();
 
-    // Query core supply chain topology for high-performance canvas
+    // Query core supply chain topology
     const nodeRes = await graph.query(`
       MATCH (n)
       WHERE n:Company OR n:Facility OR n:Material OR n:Product OR (n:Incident AND n.status <> 'RESOLVED')
       RETURN id(n) AS internalId, labels(n)[0] AS type, properties(n) AS props
-      LIMIT 80
+      LIMIT 90
     `);
 
     const internalIdMap = new Map<number, any>();
-
-    const xOffsets: Record<string, number> = {
-      Company: 120,
-      Supplier: 120,
-      Facility: 360,
-      Warehouse: 360,
-      Factory: 360,
-      Port: 360,
-      Material: 600,
-      Product: 840,
-      Incident: 240,
-      Shipment: 480,
-      Order: 1040,
+    const typeBuckets: Record<string, any[]> = {
+      Incident: [],
+      Company: [],
+      Facility: [],
+      Material: [],
+      Product: [],
     };
 
-    const typeCounts: Record<string, number> = {};
+    nodeRes.data.forEach((row: any) => {
+      const type = row.type || 'Company';
+      const bucket = typeBuckets[type] || typeBuckets['Company'];
+      bucket.push(row);
+    });
 
-    const nodes = nodeRes.data.map((row: any) => {
-      const type = row.type || 'Node';
-      typeCounts[type] = (typeCounts[type] || 0) + 1;
-      const count = typeCounts[type];
-      const y = 60 + ((count * 65) % 480);
+    const nodes: any[] = [];
 
+    // Assign spacious non-overlapping positions
+    // 1. Incidents (Column 0, x=150)
+    typeBuckets.Incident.forEach((row: any, idx: number) => {
       const p = row.props || {};
-      const isImpacted = p.status === 'disrupted' || p.currentStatus === 'CRITICAL_DELAY' || p.status === 'ACTIVE_DISRUPTION';
-      const isAlt = p.status === 'backup';
-
-      const nodeObj = {
+      const node = {
         id: p.id || `node-${row.internalId}`,
         internalId: row.internalId,
-        label: p.name || p.title || p.code || p.specCode || type,
-        type,
-        subType: p.category || p.industry || p.facilityType || p.severity || type,
-        x: xOffsets[type] || 500,
-        y,
-        isImpacted,
-        isAlternative: isAlt,
+        label: p.title || p.code || 'Incident',
+        type: 'Incident',
+        subType: p.severity || 'CRITICAL',
+        x: 160,
+        y: 120 + idx * 160,
+        isImpacted: true,
+        isAlternative: false,
         details: p,
       };
+      internalIdMap.set(row.internalId, node);
+      nodes.push(node);
+    });
 
-      internalIdMap.set(row.internalId, nodeObj);
-      return nodeObj;
+    // 2. Companies / Suppliers (Columns 1 & 2, x=440 and x=680)
+    typeBuckets.Company.forEach((row: any, idx: number) => {
+      const p = row.props || {};
+      const col = idx % 2;
+      const rowIdx = Math.floor(idx / 2);
+      const isImpacted = p.status === 'disrupted';
+      const node = {
+        id: p.id || `node-${row.internalId}`,
+        internalId: row.internalId,
+        label: p.name || 'Company',
+        type: 'Supplier',
+        subType: p.industry || p.category || 'Supplier',
+        x: 440 + col * 240,
+        y: 90 + rowIdx * 125,
+        isImpacted,
+        isAlternative: false,
+        details: p,
+      };
+      internalIdMap.set(row.internalId, node);
+      nodes.push(node);
+    });
+
+    // 3. Facilities (Columns 3 & 4, x=1020 and x=1240)
+    typeBuckets.Facility.forEach((row: any, idx: number) => {
+      const p = row.props || {};
+      const col = idx % 2;
+      const rowIdx = Math.floor(idx / 2);
+      const node = {
+        id: p.id || `node-${row.internalId}`,
+        internalId: row.internalId,
+        label: p.name || 'Facility',
+        type: p.facilityType === 'Warehouse' ? 'Warehouse' : 'Factory',
+        subType: p.city ? `${p.city}, ${p.country}` : p.facilityType,
+        x: 1020 + col * 240,
+        y: 90 + rowIdx * 125,
+        isImpacted: false,
+        isAlternative: false,
+        details: p,
+      };
+      internalIdMap.set(row.internalId, node);
+      nodes.push(node);
+    });
+
+    // 4. Materials (Columns 5 & 6, x=1580 and x=1800)
+    typeBuckets.Material.forEach((row: any, idx: number) => {
+      const p = row.props || {};
+      const col = idx % 2;
+      const rowIdx = Math.floor(idx / 2);
+      const node = {
+        id: p.id || `node-${row.internalId}`,
+        internalId: row.internalId,
+        label: p.name || 'Material',
+        type: 'Material',
+        subType: p.category || 'Material',
+        x: 1580 + col * 240,
+        y: 90 + rowIdx * 125,
+        isImpacted: false,
+        isAlternative: false,
+        details: p,
+      };
+      internalIdMap.set(row.internalId, node);
+      nodes.push(node);
+    });
+
+    // 5. Products (Column 7, x=2140)
+    typeBuckets.Product.forEach((row: any, idx: number) => {
+      const p = row.props || {};
+      const node = {
+        id: p.id || `node-${row.internalId}`,
+        internalId: row.internalId,
+        label: p.name || 'Product',
+        type: 'Product',
+        subType: 'Assembly BOM',
+        x: 2140,
+        y: 120 + idx * 140,
+        isImpacted: false,
+        isAlternative: false,
+        details: p,
+      };
+      internalIdMap.set(row.internalId, node);
+      nodes.push(node);
     });
 
     // Query edges between these nodes
@@ -284,7 +359,7 @@ app.get('/api/graph', async (req, res) => {
       WHERE (a:Company OR a:Facility OR a:Material OR a:Product OR a:Incident)
         AND (b:Company OR b:Facility OR b:Material OR b:Product OR b:Incident)
       RETURN id(a) AS source, id(b) AS target, type(r) AS rel, properties(r) AS props
-      LIMIT 120
+      LIMIT 160
     `);
 
     const edges = edgeRes.data
@@ -311,6 +386,205 @@ app.get('/api/graph', async (req, res) => {
   } catch (err: any) {
     console.error('Error fetching graph:', err.message);
     res.json({ nodes: [], edges: [] });
+  }
+});
+
+// 7b. Targeted Blast Radius Subgraph for an Incident
+app.get('/api/graph/impact/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const graph = await getGraph();
+
+    // Query incident and its immediate blast radius
+    const incRes = await graph.query(`
+      MATCH (i:Incident {id: '${escapeCypher(id)}'})
+      OPTIONAL MATCH (i)-[:AFFECTS_COMPANY]->(comp:Company)
+      OPTIONAL MATCH (i)-[:AFFECTS_FACILITY]->(fac:Facility)
+      OPTIONAL MATCH (comp)-[:SUPPLIES]->(m:Material)
+      OPTIONAL MATCH (alt:Company)-[:CAN_SUPPLY]->(m) WHERE alt.id <> comp.id
+      OPTIONAL MATCH (o:Order)-[:FULFILLED_BY]->(fac) WHERE o.status = 'AT_RISK'
+      RETURN i, comp, fac, collect(DISTINCT m) AS materials,
+             collect(DISTINCT alt)[0..2] AS altSuppliers,
+             collect(DISTINCT o)[0..3] AS atRiskOrders
+    `);
+
+    const row = incRes.data?.[0];
+    if (!row || !row.i) {
+      return res.redirect('/api/graph');
+    }
+
+    const incProps = row.i.properties || row.i;
+    const compProps = row.comp ? (row.comp.properties || row.comp) : null;
+    const facProps = row.fac ? (row.fac.properties || row.fac) : null;
+    const materials = row.materials || [];
+    const altSuppliers = row.altSuppliers || [];
+    const atRiskOrders = row.atRiskOrders || [];
+
+    const nodes: any[] = [];
+    const edges: any[] = [];
+
+    // Stage 1: Incident
+    const incNode = {
+      id: incProps.id || id,
+      label: incProps.title || 'Incident',
+      type: 'Incident',
+      subType: incProps.severity || 'CRITICAL',
+      x: 160,
+      y: 280,
+      isImpacted: true,
+      isAlternative: false,
+      details: incProps,
+    };
+    nodes.push(incNode);
+
+    // Stage 2: Impacted Company
+    if (compProps) {
+      const compNode = {
+        id: compProps.id,
+        label: compProps.name,
+        type: 'Supplier',
+        subType: compProps.industry || 'Disrupted Vendor',
+        x: 440,
+        y: 280,
+        isImpacted: true,
+        isAlternative: false,
+        details: compProps,
+      };
+      nodes.push(compNode);
+      edges.push({
+        id: 'e-inc-comp',
+        source: incNode.id,
+        target: compNode.id,
+        relationship: 'AFFECTS',
+        label: 'AFFECTS',
+        isImpactPath: true,
+      });
+    }
+
+    // Stage 3: Impacted Facility
+    if (facProps) {
+      const facNode = {
+        id: facProps.id,
+        label: facProps.name,
+        type: facProps.facilityType === 'Warehouse' ? 'Warehouse' : 'Factory',
+        subType: `${facProps.city}, ${facProps.country}`,
+        x: 740,
+        y: 280,
+        isImpacted: true,
+        isAlternative: false,
+        details: facProps,
+      };
+      nodes.push(facNode);
+      edges.push({
+        id: 'e-inc-fac',
+        source: incNode.id,
+        target: facNode.id,
+        relationship: 'IMPACTS',
+        label: 'IMPACTS',
+        isImpactPath: true,
+      });
+
+      if (compProps) {
+        edges.push({
+          id: 'e-comp-fac',
+          source: compProps.id,
+          target: facNode.id,
+          relationship: 'DELIVERS_TO',
+          label: 'DELIVERS_TO',
+          isImpactPath: true,
+        });
+      }
+    }
+
+    // Stage 4: Materials
+    materials.slice(0, 2).forEach((mRaw: any, idx: number) => {
+      const mProps = mRaw.properties || mRaw;
+      const matNode = {
+        id: mProps.id,
+        label: mProps.name,
+        type: 'Material',
+        subType: mProps.category || 'Material',
+        x: 1040,
+        y: 180 + idx * 200,
+        isImpacted: true,
+        isAlternative: false,
+        details: mProps,
+      };
+      nodes.push(matNode);
+
+      if (compProps) {
+        edges.push({
+          id: `e-comp-mat-${idx}`,
+          source: compProps.id,
+          target: matNode.id,
+          relationship: 'SUPPLIES',
+          label: 'SUPPLIES',
+          isImpactPath: true,
+        });
+      }
+    });
+
+    // Alternative Suppliers
+    altSuppliers.slice(0, 2).forEach((altRaw: any, idx: number) => {
+      const altProps = altRaw.properties || altRaw;
+      const altNode = {
+        id: altProps.id,
+        label: altProps.name,
+        type: 'Supplier',
+        subType: `${altProps.reliabilityScore || 96}% Reliable Backup`,
+        x: 440,
+        y: 460 + idx * 130,
+        isImpacted: false,
+        isAlternative: true,
+        details: altProps,
+      };
+      nodes.push(altNode);
+
+      if (nodes.find(n => n.type === 'Material')) {
+        const mat = nodes.find(n => n.type === 'Material');
+        edges.push({
+          id: `e-alt-mat-${idx}`,
+          source: altNode.id,
+          target: mat.id,
+          relationship: 'CAN_SUPPLY',
+          label: 'CAN_SUPPLY (Backup)',
+          isImpactPath: false,
+        });
+      }
+    });
+
+    // Orders at Risk
+    atRiskOrders.slice(0, 3).forEach((oRaw: any, idx: number) => {
+      const oProps = oRaw.properties || oRaw;
+      const ordNode = {
+        id: oProps.id,
+        label: oProps.customerName || 'Customer Order',
+        type: 'Order',
+        subType: `$${Number(oProps.value || 150000).toLocaleString()}`,
+        x: 1360,
+        y: 140 + idx * 150,
+        isImpacted: true,
+        isAlternative: false,
+        details: oProps,
+      };
+      nodes.push(ordNode);
+
+      if (facProps) {
+        edges.push({
+          id: `e-fac-ord-${idx}`,
+          source: facProps.id,
+          target: ordNode.id,
+          relationship: 'FULFILLS',
+          label: 'FULFILLS',
+          isImpactPath: true,
+        });
+      }
+    });
+
+    res.json({ nodes, edges });
+  } catch (err: any) {
+    console.error('Error fetching impact graph:', err.message);
+    res.redirect('/api/graph');
   }
 });
 
