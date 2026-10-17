@@ -1,25 +1,5 @@
-material_id,material_name,category
-M001,Silicon wafers,Semiconductor material
-M002,Copper,Metal
-M003,Lithium compounds,Battery material
-M004,Cobalt,Battery material
-M005,Nickel,Metal
-M006,Aluminum,Metal
-M007,Specialty chemicals,Chemical
-M008,Glass substrate,Display material
-M009,Printed circuit boards,Electronic component
-M010,DRAM memory,Semiconductor
-M011,NAND flash memory,Semiconductor
-M012,GPU modules,Electronic component
-M013,Power management ICs,Semiconductor
-M014,Sensors,Electronic component
-M015,Battery cells,Battery component
-M016,Camera modules,Electronic component
-M017,Display panels,Electronic component
-M018,Resins,Chemical
-M019,Steel,Metal
-M020,Packaging materials,Packaging
-M021,Lithography equipment,Manufacturing equipment
-M022,Industrial gases,Chemical
-M023,Connectors,Electronic component
-M024,Electric motors,Automotive component
+id,name
+M1,Lithium Battery Pack
+M2,Brake Assembly
+M3,Semiconductor Controller
+M4,Steel Component

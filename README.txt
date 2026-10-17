@@ -1,15 +1,25 @@
-NEXUS OPS HACKATHON DATA BUNDLE
+NEXUS OPS — COMPACT HACKATHON DATASET
 
-CSV files:
-- companies.csv: 35 real company names and broad industry/headquarters details.
-- materials.csv: 24 material/component categories.
-- facilities.csv: 20 illustrative facility/location records (not claims of actual company-owned sites).
-- supplier_relationships.csv: 80 synthetic supplier/material/facility relationships.
-- shipments.csv: 400 synthetic historical-style shipments dated 2023-2026.
-- orders.csv: 800 synthetic historical-style orders dated 2023-2026.
-- incidents.csv: 30 synthetic historical-style disruption scenarios dated 2023-2026.
+Size: 32 graph entities/nodes plus relationship CSVs:
+4 suppliers, 4 materials, 4 products, 4 facilities, 4 shipments, 4 orders,
+2 customers, and 2 incidents.
 
-DATA PROVENANCE WARNING:
-Company names are real public company names. Supplier relationships, facility associations, orders, shipment movements, delays, and incidents are generated for demonstration. They are NOT actual historical transactions or verified company events. Do not present them as factual relationships involving the named companies.
+Data provenance:
+Supplier names are real company names used only as demo labels. Supplier-material
+relationships, facilities, shipments, orders, delays, customers, and incidents are
+illustrative synthetic data. They are NOT verified real-world supplier relationships,
+company-owned facilities, transactions, or actual incidents. Keep this disclaimer
+in your demo and README.
 
-Use the dataset to test graph traversal, incident investigation, agent recommendations, and persistent memory. Compute counts from the data, not from LLM guesses.
+Suggested graph relationships:
+- (:Supplier)-[:SUPPLIES]->(:Material) from supplier_materials.csv
+- (:Product)-[:USES]->(:Material) from product_materials.csv
+- (:Shipment)-[:CARRIES]->(:Material) and (:Shipment)-[:DELIVERED_TO]->(:Facility)
+  from shipments.csv
+- (:Order)-[:ORDERS]->(:Product) and (:Order)-[:PLACED_BY]->(:Customer)
+  from orders.csv
+- (:Incident)-[:AFFECTS]->(:Shipment) from affected_shipment_id in incidents.csv
+
+Demo: investigate I1 or I2, traverse to affected materials/products/orders/customers,
+generate an evidence-grounded recommendation, then create Decision/Action/Outcome
+memory nodes during the demo. Operational data is synthetic, not real company events.
